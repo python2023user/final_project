@@ -28,7 +28,9 @@ Installation:
   - git clone https://github.com/python2023user/final_project
 
   - conda install requirements.txt
-                 or
+
+  or
+
   - pip install requirements.txt
 
 How to use:
