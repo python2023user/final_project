@@ -1,4 +1,5 @@
-#final_project - Financial Manager with console interface. (Translated into Bulgarian)
+#final_project
+Financial Manager with console interface. (Translated into Bulgarian)
 
 Available options:
 
