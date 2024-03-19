@@ -1,4 +1,3 @@
-import csv
 import os
 import time
 from sqlalchemy.exc import IntegrityError
@@ -508,7 +507,10 @@ def show_expense(u_account):
         os.system('cls')
 
     elif value == "5":
-        old_days = int(input("Въведете брой дни: "))
+        try:
+            old_days = int(input("Въведете брой дни: "))
+        except:
+            old_days = 0
         old_days_ = date.today() - timedelta(days=old_days)
         os.system('cls')
         print(f"Показване на списък с разходи за за {old_days} {'дни' if old_days > 1 else 'ден'} назад | ({u_account.email})\n-")
@@ -604,7 +606,10 @@ def show_income(account):
         os.system('cls')
 
     elif value == "5":
-        old_days = int(input("Въведете брой дни: "))
+        try:
+            old_days = int(input("Въведете брой дни: "))
+        except:
+            old_days = 0
         old_days_ = date.today() - timedelta(days=old_days)
         os.system('cls')
         print(f"Показване на списък с приходи за {old_days} {'дни' if old_days > 1 else 'ден'} назад | ({account.email})\n-")
@@ -870,28 +875,6 @@ def get_income(account):
 # Get functions => end
 ##############################################################################
 
-def loading_data():
-    psw = 'Abc123456' 
-    account = session.query(Account).filter(Account.email=='petar@example.com').first()
-    if account and bcrypt.checkpw(psw.encode('utf-8'), account.password):
-        print(account)
-        added_data = []
-        with open('new.csv', mode='r', encoding='utf-8') as file:
-            print("vliza v with")
-            csv_reader = csv.reader(file)
-            next(csv_reader, None)
-            print("predi for")
-            for row in csv_reader:
-                if row and row[4] == "Петър":
-                    date = datetime.strptime(row[1], '%Y-%m-%d')
-                    if row[0] == "expens":
-                        added_data.append(Expense(sum_expense=float(row[2]), date_expense=date, desc_expense=row[3], account_email=account.email))
-                    elif row[0] == "income":
-                        added_data.append(Income(sum_income=float(row[2]), date_income=date, desc_income=row[3], account_email=account.email))
-        session.add_all(added_data)
-        session.commit()
-
-# loading_data()
 
 if __name__ == '__main__':
     Load_Menu(current_account)
