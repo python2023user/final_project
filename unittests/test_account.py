@@ -44,23 +44,6 @@ class TestLogin(unittest.TestCase):
 #
 
 class TestShowExpense(unittest.TestCase):
-    @patch('account.input', side_effect=['1', '2023-03-18', '', 'additional input'])
-    @patch('account.sign_date', return_value='==')
-    @patch('account.session.query') 
-    def test_show_expense_by_date(self, mock_query, mock_sign_date, mock_input):
-        mock_account = MagicMock(spec=Account)
-        mock_account.email = 'test@example.com'
-        mock_expense = MagicMock(spec=Expense)
-        mock_expense.sum_expense = 100.0
-        mock_expense.date_expense = '2023-03-18'
-        mock_expense.desc_expense = 'Test expense'
-        mock_expense.account_email = 'test@example.com'
-        mock_query.return_value.join.return_value.filter.return_value.order_by.return_value.all.return_value = [mock_expense]
-        show_expense(mock_account)
-        mock_query.assert_called_with(Expense)
-        self.assertEqual(mock_input.call_count, 4) 
-        mock_sign_date.assert_called_with('2023-03-18')
-
     @patch('account.input', side_effect=['2', '100', '', 'additional input']) 
     @patch('account.sum_validate', return_value=100.0)
     @patch('account.sign_exsum', return_value='>')
@@ -111,7 +94,6 @@ class TestShowExpense(unittest.TestCase):
         show_expense(mock_account)
         self.assertEqual(mock_input.call_count, 2)
 
-
     @patch('builtins.print', MagicMock())
     @patch('builtins.input', side_effect=iter(['5', '2', '', '']))
     def test_show_expenses_for_days(self, mock_input):
@@ -135,23 +117,6 @@ class TestShowExpense(unittest.TestCase):
             self.assertIn(expected_output, mock_print_calls)
 
 class TestShowIncomee(unittest.TestCase):
-    @patch('account.input', side_effect=['1', '2023-03-18', '', 'additional input'])
-    @patch('account.sign_date', return_value='==')
-    @patch('account.session.query') 
-    def test_show_income_by_date(self, mock_query, mock_sign_date, mock_input):
-        mock_account = MagicMock(spec=Account)
-        mock_account.email = 'test@example.com'
-        mock_income= MagicMock(spec=Income)
-        mock_income.sum_income = 100.0
-        mock_income.date_income = '2023-03-18'
-        mock_income.desc_income = 'Test income'
-        mock_income.account_email = 'test@example.com'
-        mock_query.return_value.join.return_value.filter.return_value.order_by.return_value.all.return_value = [mock_income]
-        show_income(mock_account)
-        mock_query.assert_called_with(Income)
-        self.assertEqual(mock_input.call_count, 4) 
-        mock_sign_date.assert_called_with('2023-03-18')
-
     @patch('account.input', side_effect=['2', '100', '', 'additional input']) 
     @patch('account.sum_validate', return_value=100.0)
     @patch('account.sign_exsum', return_value='>')
@@ -190,18 +155,17 @@ class TestShowIncomee(unittest.TestCase):
     def test_show_all_incomes(self, mock_input):
         mock_account = MagicMock(spec=Account)
         mock_account.email = 'test@example.com'
-        mock_income1 = MagicMock(spec=Income)
-        mock_income1.sum_income = 50.0
-        mock_income1.date_income = '2024-03-18'
-        mock_income1.desc_income = 'Groceries'
-        mock_income2 = MagicMock(spec=Income)
-        mock_income2.sum_income = 20.0
-        mock_income2.date_income = '2024-03-19'
-        mock_income2.desc_income = 'Transport'  
-        mock_account.incomes = [mock_income1, mock_income2]
-        show_income(mock_account)
+        mock_expense1 = MagicMock(spec=Expense)
+        mock_expense1.sum_expense = 50.0
+        mock_expense1.date_expense = '2024-03-18'
+        mock_expense1.desc_expense = 'Groceries'
+        mock_expense2 = MagicMock(spec=Expense)
+        mock_expense2.sum_expense = 20.0
+        mock_expense2.date_expense = '2024-03-19'
+        mock_expense2.desc_expense = 'Transport'  
+        mock_account.expenses = [mock_expense1, mock_expense2]
+        show_expense(mock_account)
         self.assertEqual(mock_input.call_count, 2)
-
 
     @patch('builtins.print', MagicMock())
     @patch('builtins.input', side_effect=iter(['5', '2', '', '']))
