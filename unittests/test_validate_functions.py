@@ -77,21 +77,6 @@ class TestEmailValidation(unittest.TestCase):
         result = email_validate("current_account") 
         self.assertEqual(result, "Load Menu Returned")
 
-    # @patch('builtins.input', return_value="wrong_email_format")
-    # @patch('validate_functions.validate_email')  
-    # def test_invalid_email(self, mock_validate_email, mock_input):
-    #     mock_validate_email.side_effect = Exception('Invalid email')
-    #     with self.assertRaises(Exception) as context:
-    #         email_validate("current_account") 
-    #     self.assertTrue('Невалиден email!' in str(context.exception))
-    # @patch('builtins.input', return_value="wrong_email_format")
-    # @patch('validate_functions.validate_email')  # Replace with your correct module
-    # def test_invalid_email(self, mock_validate_email, mock_input):
-    #     mock_validate_email.side_effect = Exception('Invalid email')
-    #     with self.assertRaises(Exception) as context:
-    #         email_validate("MockAccount")  # Replace "MockAccount" with the actual account object if needed
-    #     self.assertTrue('-\nНевалиден email!\n-' in str(context.exception))
-
 
 if __name__ == '__main__':
     unittest.main()
