@@ -27,10 +27,6 @@ Installation:
 
   - conda install requirements.txt
 
-  or
-
-  - pip install requirements.txt
-
 How to use:
   - Start account.py file with command 'py account.py' or 'python account.py'
   - The database has 2 saved accounts with sample data for a year back
