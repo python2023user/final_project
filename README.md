@@ -11,7 +11,7 @@ Available options:
   
  * Change incomes/expenses/password
   
- * DAta viewer
+ * Data viewer
    - sorted by time, reason, sum, days ago
   
  * Balkans viewer (for all time, yearly, monthly)
