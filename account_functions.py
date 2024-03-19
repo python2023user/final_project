@@ -16,6 +16,8 @@ def sign_date(ex_date):
     print(f"1 - Резултати след {ex_date}\n2 - Резултати преди {ex_date}\n3 - За {ex_date}\n-")
     return_values = {"1":">","2":"<","3":"=="}
     value = input("Избор: ")
+    if value == "":
+        return sign_date(ex_date)
     return return_values[value]
 
 def get_expense(account):
