@@ -25,7 +25,9 @@ All packages:
 Installation:
   - git clone https://github.com/python2023user/final_project
 
-  - conda install requirements.txt
+  - conda install --file requirements.txt
+    or
+  - conda install -c conda-forge --file requirements.txt
 
 How to use:
   - Start account.py file with command 'py account.py' or 'python account.py'
