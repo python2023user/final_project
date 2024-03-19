@@ -1,5 +1,4 @@
-#final_project
-Financial Manager with console interface. (Translated into Bulgarian)
+# Financial Manager with console interface. (Bulgarian)
 
 Available options:
 
@@ -43,3 +42,4 @@ How to use:
 * Account2:
   - email: petar@example.com
   - password: Abc123456
+ 
