@@ -49,11 +49,16 @@ def date_validation(operation):
 
 def sum_validate(operation=1):
     value = {"delete":"сума за изтриване","change":"сума от информацията за промяна", "new_sum":"нова сума",1:"сума"}
+    
     while True:
-        input_sum= input(f"Въведете {value[operation]} (в лева): ")
         try:
-            return float(input_sum)
-            break
+            input_sum = float(input(f"Въведете {value[operation]} (в лева): "))
+            if input_sum <= 0:
+                print("* Невалидна сума!")
+                continue
+            else:
+                return float(input_sum)
+           
         except:
             print("* Невалидна сума!")
             continue
@@ -70,3 +75,18 @@ def email_validate(current_account):
         except:
             print("-\nНевалиден email!\n-")
             continue
+
+def days_validate():
+     while True:
+        try:
+            input_days= int(input(f"Въведете брой дни: "))
+            if input_days <= 0:
+                print("* Невалидна заявка!")
+                continue
+            else:
+                return int(input_days)
+           
+        except:
+            print("* Невалидна заявка!")
+            continue
+
