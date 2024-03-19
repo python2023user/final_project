@@ -77,6 +77,14 @@ class TestEmailValidation(unittest.TestCase):
         result = email_validate("current_account") 
         self.assertEqual(result, "Load Menu Returned")
 
+class TestDaysValidate(unittest.TestCase):
+    def test_valid_input(self):
+        with unittest.mock.patch('builtins.input', return_value='5'):
+            self.assertEqual(days_validate(), 5)
 
+    def test_invalid_input(self):
+        with unittest.mock.patch('builtins.input', side_effect=['0', '10']):
+            self.assertEqual(days_validate(), 10)
+            
 if __name__ == '__main__':
     unittest.main()
