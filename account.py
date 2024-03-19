@@ -7,7 +7,7 @@ from account_functions import month, sign_date, sign_return, sign_exsum
 import bcrypt
 from sqlalchemy import Column, Date, Float, ForeignKey, Integer, String, create_engine, func
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
-from validate_functions import sum_validate, date_validation, email_validate, password_validator
+from validate_functions import sum_validate, date_validation, email_validate, password_validator, days_validate
 from datetime import date, timedelta
 import numpy as np
 
@@ -433,7 +433,7 @@ def show_expense(u_account):
     value = input("Избор: ")
 
     if value == "1":
-        ex_date = input("Въведете дата във формат YYYY-MM-DD: ")
+        ex_date = date_validation("search")
         if ex_date == "":
             show_expense(u_account)
         sign = sign_date(ex_date)
@@ -507,10 +507,7 @@ def show_expense(u_account):
         os.system('cls')
 
     elif value == "5":
-        try:
-            old_days = int(input("Въведете брой дни: "))
-        except:
-            old_days = 0
+        old_days = days_validate()
         old_days_ = date.today() - timedelta(days=old_days)
         os.system('cls')
         print(f"Показване на списък с разходи за за {old_days} {'дни' if old_days > 1 else 'ден'} назад | ({u_account.email})\n-")
@@ -532,7 +529,7 @@ def show_income(account):
 3 - Преглед по описание\n4 - Преглед на всички приходи\n5 - Показване на приходи за определени дни назад\n6 - Назад\n")
     value = input("Избор: ")
     if value == "1":
-        in_date = input("Въведете дата във формат YYYY-MM-DD: ")
+        in_date = date_validation("search")
         if in_date == "":
             show_income(account)
         sign = sign_date(in_date)
@@ -604,12 +601,10 @@ def show_income(account):
             print("Няма резултати!")
         input("-\nНатиснете 'enter' за връщане към менюто...")
         os.system('cls')
+        show_income(account)
 
     elif value == "5":
-        try:
-            old_days = int(input("Въведете брой дни: "))
-        except:
-            old_days = 0
+        old_days = days_validate()
         old_days_ = date.today() - timedelta(days=old_days)
         os.system('cls')
         print(f"Показване на списък с приходи за {old_days} {'дни' if old_days > 1 else 'ден'} назад | ({account.email})\n-")
@@ -718,7 +713,7 @@ def show_balans(u_account):
     print("-")
     print(f"> Общо приходи: {sum(income.sum_income for income in u_account.incomes):.2f} лв. \
 (за последната година: {sum_last_year_income:.2f} лв.)")
-    print(f"> Общо разходи: {sum(expense.sum_expense for expense in u_account.expenses):.2f} лв.; \
+    print(f"> Общо разходи: {sum(expense.sum_expense for expense in u_account.expenses):.2f} лв. \
 (за последната година: {sum_last_year_expense:.2f} лв.)")
     try:
         print(f"> Разход за последния месец {month[list(exp[year_inc].keys())[-1]]}: {np.sum(exp[year_exp][list(exp[year_exp].keys())[-1]]):.2f} лв. \
