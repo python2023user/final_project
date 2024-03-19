@@ -1,5 +1,6 @@
 # final_project
-Financial Manager with console interface. (BG)
+
+Financial Manager with console interface. (Translated into Bulgarian)
 
 Available options:
 
@@ -23,3 +24,21 @@ Available options:
 All packages:
   - os, time, datetime, sqlalchemy, bcrypt, numpy, tkinter, matplotlibm, unittest and coverage (for testing)
 
+Installation:
+  - git clone https://github.com/python2023user/final_project
+
+  - conda install requirements.txt
+                 or
+  - pip install requirements.txt
+
+How to use:
+  - Start account.py file with command 'py account.py' or 'python account.py'
+  - The database has 2 saved accounts with sample data for a year back
+
+* Account 1:
+  - email: ivan@example.com
+  - password: Abc123456
+ 
+* Account2:
+  - email: petar@example.com
+  - password: Abc123456
